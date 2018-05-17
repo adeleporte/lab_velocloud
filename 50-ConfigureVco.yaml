@@ -72,4 +72,4 @@
 
   - debug:
       msg: "{{ item.description }}"
-      with_items: "{{ getconfiguration.json }}"
+    with_items: "{{ getconfiguration.json }}"
