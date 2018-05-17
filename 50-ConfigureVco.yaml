@@ -71,4 +71,5 @@
     register: getconfiguration
 
   - debug:
-      msg: "{{ getconfiguration }}"
+      msg: "{{ item.description }}"
+      with_items: "{{ getconfiguration.json }}"
