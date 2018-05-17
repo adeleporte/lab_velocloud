@@ -71,5 +71,7 @@
     register: getconfiguration
 
   - debug:
-      msg: "{{ item.description }}"
+      msg: "{{ item.modules }}"
     with_items: "{{ getconfiguration.json }}"
+    when:
+        (item.description == "Antoine")
