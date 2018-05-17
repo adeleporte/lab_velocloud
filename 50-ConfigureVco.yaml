@@ -1,5 +1,5 @@
 ---
-- hosts: jumpstation
+- hosts: localhost
   gather_facts: False
   tasks:
 
@@ -30,3 +30,32 @@
     register: vco_config
     ignore_errors: yes
 
+  # Configure Profile
+  - uri:
+      url: https://{{ vco.eth0.ansible }}/portal/rest/configuration/cloneEnterpriseTemplate
+      method: POST
+      body: "{{ lookup('template', 'templates/configure-profile.j2') }}"
+      body_format: json
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept-Type: "application/json"
+        Cookie: "{{login.set_cookie}}"
+    register: vco_profile
+    ignore_errors: yes
+
+  # Get entreprise Configuration
+  - uri:
+      url: https://{{ vco.eth0.ansible }}/portal/rest/enterprise/getEnterpriseConfigurations
+      method: POST
+      body: "{{ lookup('template', 'templates/get-enterpriseconfiguration.j2') }}"
+      body_format: json
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept-Type: "application/json"
+        Cookie: "{{login.set_cookie}}"
+    register: getconfiguration
+
+  - debug:
+      msg: "{{ getconfiguration }}"
