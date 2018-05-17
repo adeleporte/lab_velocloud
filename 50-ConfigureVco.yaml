@@ -75,3 +75,18 @@
     with_items: "{{ getconfiguration.json }}"
     when:
         (item.description == "Antoine")
+
+  # Update entreprise Configuration
+  - uri:
+      url: https://{{ vco.eth0.ansible }}/portal/rest/configuration/updateConfigurationModule
+      method: POST
+      body: "{{ lookup('template', 'templates/antoine-profile.j2') }}"
+      body_format: json
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept-Type: "application/json"
+        Cookie: "{{login.set_cookie}}"
+    register: setconfiguration
+
+
