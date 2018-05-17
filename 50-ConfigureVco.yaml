@@ -14,7 +14,7 @@
         Content-Type: "application/json"
         Accept-Type: "application/json"
     register: login
-    ignore_errors: yes
+    ignore_errors: no
 
   # Configure vco
   - uri:
@@ -29,6 +29,19 @@
         Cookie: "{{login.set_cookie}}"
     register: vco_config
     ignore_errors: yes
+
+  # Get the authentication cookie (AS AN ENTERPRISE ADMIN)
+  - uri:
+      url: https://{{ vco.eth0.ansible }}/portal/rest/login/enterpriseLogin
+      method: POST
+      body: "{{ lookup('template', 'templates/enterprise-login.j2') }}"
+      body_format: json
+      validate_certs: no
+      headers:
+        Content-Type: "application/json"
+        Accept-Type: "application/json"
+    register: login
+    ignore_errors: no
 
   # Configure Profile
   - uri:
