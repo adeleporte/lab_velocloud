@@ -1,5 +1,5 @@
 ---
-- hosts: jumpstation
+- hosts: localhost
   gather_facts: False
   tasks:
 
@@ -9,8 +9,8 @@
         instanceid: vcg1
         hostname: vcg1
         password: Velocloud123
-        image: '/home/vmware/images/velocloud-vcg-3.1.0-R31-20180118-GA-2vCPU.ova'
-        portgroup: 'vxw-dvs-24-virtualwire-1-sid-5000-internet'
+        image: 'images/velocloud-vcg-3.2.0-49-R320-20180409-GA.ova'
+        portgroup: 'ls_internet'
         eth0:
           ipAllocationType: 'STATIC'
           ipAddress: '20.20.20.11'
@@ -24,8 +24,8 @@
         instanceid: vcg2
         hostname: vcg2
         password: Velocloud123
-        image: '/home/vmware/images/velocloud-vcg-3.1.0-R31-20180118-GA-2vCPU.ova'
-        portgroup: 'vxw-dvs-24-virtualwire-1-sid-5000-internet'
+        image: 'images/velocloud-vcg-3.2.0-49-R320-20180409-GA.ova'
+        portgroup: 'ls_internet'
         eth0:
           ipAllocationType: 'STATIC'
           ipAddress: '20.20.20.12'
